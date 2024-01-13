@@ -1,5 +1,5 @@
 # server-sent-events
-This repository is used to support this blog post. The interested readers can clone the repository and follow below steps to run the application. The code base has comments at the relevant places to help readers understand the logic.
+This repository is used to support [this](https://www.prakharsrivastav.com/posts/server-sent-events/) blog post. The interested readers can clone the repository and follow below steps to run the application. The code base has comments at the relevant places to help readers understand the logic.
 
 
 ## Running application
