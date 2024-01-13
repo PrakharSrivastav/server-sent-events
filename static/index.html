@@ -7,8 +7,11 @@
 <body>
 <main class="container">
     <h1>Cat breeds</h1>
+    <!--    call fetchData function on click-->
     <button onclick="fetchData();">Click to get cat breeds</button>
     <table>
+
+        <!-- root element, the fetchData call will append the children under it in realtime-->
         <tbody id="root"></tbody>
     </table>
     <div></div>
@@ -16,15 +19,22 @@
 
 <script>
     function fetchData() {
+        // create an EventSource stream
         const eventSource = new EventSource('http://localhost:8080/events');
+
+
+        // on message (identified by prefix 'data : ' in the response),
+        // append to response to root
         eventSource.onmessage = function (event) {
             const dataElement = document.getElementById('root');
             dataElement.innerHTML += '<th scope="row">' + event.data + '</th>';
         };
 
+        // on connection drop, close the eventSource and perform any cleanup if needed
         eventSource.onerror = function (event) {
             console.log(event);
             eventSource.close()
+            console.log("performing cleanup ......")
         }
     }
 </script>
