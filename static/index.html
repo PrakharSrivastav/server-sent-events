@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <title>SSE Example</title>
+</head>
+<body>
+<main class="container">
+    <h1>Cat breeds</h1>
+    <button onclick="fetchData();">Click to get cat breeds</button>
+    <table>
+        <tbody id="root"></tbody>
+    </table>
+    <div></div>
+</main>
+
+<script>
+    function fetchData() {
+        const eventSource = new EventSource('http://localhost:8080/events');
+        eventSource.onmessage = function (event) {
+            const dataElement = document.getElementById('root');
+            dataElement.innerHTML += '<th scope="row">' + event.data + '</th>';
+        };
+
+        eventSource.onerror = function (event) {
+            console.log(event);
+            eventSource.close()
+        }
+    }
+</script>
+</body>
+</html>
