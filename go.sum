@@ -1,2 +1,4 @@
+github.com/brianvoe/gofakeit/v6 v6.28.0 h1:Xib46XXuQfmlLS2EXRuJpqcw8St6qSZz75OUo0tgAW4=
+github.com/brianvoe/gofakeit/v6 v6.28.0/go.mod h1:Xj58BMSnFqcn/fAQeSK+/PLtC5kSb7FJIq4JyGa8vEs=
 github.com/tinygg/gofaker v1.0.8 h1:BE+OMP8+zVI5sxUSeszJkjhxchb5YHW2P8U6VgCqf2g=
 github.com/tinygg/gofaker v1.0.8/go.mod h1:UFXRlAcVlN5MgrkAV4ItkR7qxA15xaDL66HL9Wq+L+M=

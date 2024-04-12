@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/tinygg/gofaker"
+	"github.com/brianvoe/gofakeit/v6"
 	"math/rand"
 	"net/http"
 	"time"
@@ -25,8 +25,8 @@ func main() {
 // On 11th iteration, the control breaks out of the loop and the
 // http connection is dropped.
 // This connection drop is captured by client and client handles the connection drop accordingly
-func eventsHandler(w http.ResponseWriter, r *http.Request) {
 
+func eventsHandler(w http.ResponseWriter, r *http.Request) {
 	// set up the required response headers
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	// content-type should be 'text/event-stream'
@@ -36,21 +36,21 @@ func eventsHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Connection", "keep-alive")
 
 	count := 1
-	gofaker.Seed(int64(rand.Int()))
+	gofakeit.Seed(int64(rand.Int()))
 
-	for {
-		if count > 10 {
-			// break out of the loop on the 11th iteration, to drop the http connection
-			break
-		}
+	numIterations := 10
 
-		breed := gofaker.Cat()
+	for count <= numIterations {
+		breed := gofakeit.Cat()
 		// sleep for 100ms to simulate server processing
 		time.Sleep(100 * time.Millisecond)
-		fmt.Fprintf(w, "data: %s \n\n", fmt.Sprintf("%d : %s", count, breed))
+		fmt.Fprintf(w, "data: %d : %s \n\n", count, breed)
 
-		// flush the response
-		w.(http.Flusher).Flush()
+		// check if the ResponseWriter supports Flusher interface
+		if f, ok := w.(http.Flusher); ok {
+			// flush the response
+			f.Flush()
+		}
 
 		count++
 	}
